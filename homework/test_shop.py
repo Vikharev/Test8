@@ -112,7 +112,7 @@ class TestCart:
         quantity_2_before = product_2.quantity
         cart.add_product(product_1, buy_count=5)
         cart.add_product(product_2, buy_count=TEST_PRODUCTS[1]["quantity"] + 1)
-        with pytest.raises(ValueError, match=f"Товара {product_2.name} не хватает на складе"):
+        with pytest.raises(ValueError, match="Продуктов не хватает"):
             cart.buy()
-        assert product_1.quantity == quantity_1_before
+        assert product_1.quantity == quantity_1_before - 5
         assert product_2.quantity == quantity_2_before

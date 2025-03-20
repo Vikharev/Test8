@@ -86,8 +86,6 @@ class Cart:
         Метод покупки.
         Если товаров не хватает на складе, выбрасывается исключение ValueError
         """
-        for element in self.products:
-            if not element.check_quantity(self.products[element]):
-                raise ValueError(f'Товара {element.name} не хватает на складе')
-        for element in self.products:
-            element.buy(self.products[element])
+        for product, quantity in self.products.items():
+            product.buy(quantity)
+        self.clear()
